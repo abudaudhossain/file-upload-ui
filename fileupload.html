@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- action="http://localhost:3000/api/fileUpload" -->
+    <form enctype="multipart/form-data" method="">
+        <div class="form-group">
+            <input onchange="resumeArea" id="resume" type="file" class="form-control-file" name="uploaded_file">
+            <input id="name" type="text" name="name">
+            <!-- <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers"> -->
+            <input onclick="SubmitData()" type="button" value="Get me the stats!" class="btn btn-default">
+        </div>
+    </form>
+
+    <script>
+        const resumeFeild = document.getElementById("resume");
+        const name = document.getElementById("name");
+
+        function resumeArea() {
+            console.log(resumeFeild);
+        }
+
+        function SubmitData() {
+            let formData = new FormData();
+            formData.append("resume", resumeFeild.files[0]);
+            formData.append('name', name.value);
+            formData.append("jobToken", "Tq2D15job1645507808623ko99");
+            formData.append("jobCategoryToken", "z9KA60jobCat1645274759615g247");
+            formData.append('email', "s@gmail.com");
+            formData.append('phoneNumber', "01682991306");
+            formData.append("address", "dhaka",);
+            formData.append("experience", "1 year");
+            formData.append("noticePeriod", "7 days");
+            formData.append("portfolio", ".....");
+            formData.append("coverLetter", ".......");
+
+
+            // inputData.name = nameFeild.value;
+            // console.log(inputData)
+            // fetch('http://localhost:3000/api/fileUpload', {
+            fetch('http://localhost:8000/career/job/response/resumeUpload', {
+            // fetch('http://localhost:8000/career/submit/response', {
+            // fetch('http://api.testandtry.xyz/v1/career/submit/response', {
+                method: "POST",
+                body: formData,
+                headers: {
+                    "app-token": "SMAAV1",
+                    "app-key": "SMAAV12021",
+                    "app-password": "SHODAIMAMA21",
+                    "source": "AMA",
+                    "language": "en",
+                    "permission": "COMMON_BROWSE_APP",
+                    "device-id": 32,
+                    "device-info": 123,
+                    // "device-session-token": ,
+                    // "content-type": "application/json"
+                }
+            })
+                .then(response => response.json())
+                .then(json => console.log(json));
+
+        }
+    </script>
+</body>
+
+</html>
